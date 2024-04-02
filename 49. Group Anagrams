@@ -1,0 +1,27 @@
+1回目。
+
+```python
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        sorted_word_to_words = {}
+        for word in strs:
+            sorted_word = ''.join(sorted(word))
+            if sorted_word not in sorted_word_to_words:
+                sorted_word_to_words[sorted_word] = []
+            sorted_word_to_words[sorted_word].append(word)
+        return sorted_word_to_words.values()
+```
+
+2回目。.values() の返り値は view object だそうなので、型ヒントと合うよう list に変換する。
+
+```python
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        sorted_word_to_words = {}
+        for word in strs:
+            sorted_word = ''.join(sorted(word))
+            if sorted_word not in sorted_word_to_words:
+                sorted_word_to_words[sorted_word] = []
+            sorted_word_to_words[sorted_word].append(word)
+        return list(sorted_word_to_words.values())
+```
