@@ -13,7 +13,7 @@ class Solution:
         return -1
 ```
 
-2回目。3回目も同じ。
+2回目。char_nums -> char_counts と rename した。 3回目も同じ。
 
 ```py
 from collections import defaultdict
