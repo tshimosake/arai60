@@ -24,3 +24,23 @@ class Solution:
 mid を右側にしたのは、単に len(nums) // 2 が (len(nums)  - 1) // 2 より簡潔だから。
 
 3回目も特に変化なし。
+
+提出後の追記：
+nodchip さん、odaさんに指摘され、スライスによるコピーを作らないケースを実装した。
+かなり高速化できたようで、実際、leetcode 上で計算速度は beats 100% と出た。
+
+```py
+class Solution:
+    def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
+        def build_bst_from_range(left_index: int, right_index: int) -> Optional[TreeNode]:
+            # 基本ケース
+            if left_index > right_index:
+                return None
+            # 再帰ケース
+            mid = (left_index + right_index) // 2
+            res = TreeNode(nums[mid])
+            res.left = build_bst_from_range(left_index, mid - 1)
+            res.right = build_bst_from_range(mid + 1, right_index)
+            return res
+        return build_bst_from_range(0, len(nums) - 1)
+```
